@@ -67,16 +67,51 @@ const quotes = [
 	}
 ];
 
+const backgroundColors = [
+	'#422fcc',
+	'#1e9eab',
+	'#ae123a',
+	'#ce731d',
+	'#27284d',
+	'#7d7a73',
+	'#863da5',
+	'#23a659',
+	'#1f478a'
+];
+
 /***
  * `getRandomQuote` function
- * Generates a random number to pull a quote from the quotes array and return it.
+ * Calls for random number and returns a quote from the quotes array.
  ***/
 
 function getRandomQuote() {
 	// Generate random number between 0 and quotes length - 1
-	const randomNumber = Math.floor(Math.random() * quotes.length);
+	const randomNumber = generateRandom(quotes.length);
 	// Return quote object at random number index
 	return quotes[randomNumber];
+}
+
+/***
+ * `generateRandom` function
+ * Generates a random number between 0 and length passed in.
+ ***/
+
+function generateRandom(upperBound) {
+	return Math.floor(Math.random() * upperBound);
+}
+
+/***
+ * `buildTagList` function
+ * Builds an unordered list from the tags property in the quote object.
+ ***/
+
+function buildTagList(tags) {
+	let tagsList = '<ul class="tag-list">';
+	tags.map((tag) => {
+		tagsList += `<li class="tag">${tag}</li>`;
+	});
+	tagsList += '</ul>';
+	return tagsList;
 }
 
 /***
@@ -87,6 +122,10 @@ function getRandomQuote() {
 function printQuote() {
 	// Retrieve random quote object
 	const quote = getRandomQuote();
+
+	// Set body background to random color
+	document.body.style.backgroundColor = getRandomBackgroundColor();
+
 	// Build base HTML with quote and source
 	let htmlString = `
     <p class="quote">${quote.quote}</p>
@@ -99,10 +138,20 @@ function printQuote() {
 		htmlString += `<span class="citation">${quote.citation}</span>`;
 	if (quote.year) htmlString += `<span class="year">${quote.year}</span>`;
 
-	htmlString += '</p>';
+	htmlString += `${buildTagList(quote.tags)}</p>`;
 
 	// Update quote-box HTML to new random quote
 	document.getElementById('quote-box').innerHTML = htmlString;
+}
+
+/***
+ * `getRandomBackgroundColor` function
+ * Generates a random number and returns the background color from backgroundColors array.
+ ***/
+
+function getRandomBackgroundColor() {
+	const randomNumber = generateRandom(backgroundColors.length);
+	return backgroundColors[randomNumber];
 }
 
 /***
@@ -113,3 +162,10 @@ function printQuote() {
 document
 	.getElementById('load-quote')
 	.addEventListener('click', printQuote, false);
+
+// Automatically refresh quote every 10 seconds
+document.addEventListener('DOMContentLoaded', () => {
+	setInterval(() => {
+		printQuote();
+	}, 10000);
+});
