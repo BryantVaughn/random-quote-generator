@@ -76,11 +76,25 @@ function getRandomQuote() {
 	return quotes[randomNumber];
 }
 
-console.log(getRandomQuote());
-
 /***
  * `printQuote` function
  ***/
+
+function printQuote() {
+	const quote = getRandomQuote();
+	let htmlString = `
+    <p class="quote">${quote.quote}</p>
+    <p class="source">${quote.source}
+  `;
+
+	if (quote.citation)
+		htmlString += `<span class="citation">${quote.citation}</span>`;
+	if (quote.year) htmlString += `<span class="year">${quote.year}</span>`;
+
+	htmlString += '</p>';
+
+	document.getElementById('quote-box').innerHTML = htmlString;
+}
 
 /***
  * click event listener for the print quote button
