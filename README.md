@@ -1,0 +1,3 @@
+# Random Quote Generator
+
+This is the first project in the Full Stack JavaScript Techdegree on Treehouse. It uses an array of quote objects and displays them randomly on the page, one at a time. It's built to show a new quote every 10 seconds through the use of the `setInterval` function. I also added an array of hex colors which are used to randomly select a background color every time the quote is updated.
