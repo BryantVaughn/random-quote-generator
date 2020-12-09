@@ -25,7 +25,7 @@ const quotes = [
 	{
 		quote: `Code is like humor. When you have to explain it, it's bad`,
 		source: 'Cory House',
-		tags: ['tech', 'code']
+		tags: ['tech', 'code', 'humor']
 	},
 	{
 		quote: 'No one can make you feel inferior without your consent.',
