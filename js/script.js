@@ -9,6 +9,7 @@ project 1 - A Random Quote Generator
 
 /***
  * `quotes` array
+ * Array of quote objects
  ***/
 
 const quotes = [
@@ -67,6 +68,11 @@ const quotes = [
 	}
 ];
 
+/***
+ * `backgroundColors` array
+ * Array of hex background colors
+ ***/
+
 const backgroundColors = [
 	'#422fcc',
 	'#1e9eab',
@@ -78,6 +84,13 @@ const backgroundColors = [
 	'#23a659',
 	'#1f478a'
 ];
+
+/***
+ * `interval` variable
+ * Used to store returned interval id
+ ***/
+
+let interval = null;
 
 /***
  * `getRandomQuote` function
@@ -164,17 +177,44 @@ function getRandomBackgroundColor() {
 }
 
 /***
+ * `handleButtonClick` function
+ * Resets the timer for the 10 second interval and generates new quote.
+ */
+
+function handleButtonClick() {
+	removeInterval();
+	startInterval();
+	printQuote();
+}
+
+/***
+ * `startTimeInterval` function
+ * Generates a random number and returns the background color from backgroundColors array.
+ ***/
+
+function startInterval() {
+	// Automatically refresh quote every 10 seconds
+	interval = setInterval(() => {
+		printQuote();
+	}, 10000);
+}
+
+/***
+ * `removeInterval` function
+ * Clears the current interval so it no longer runs.
+ */
+
+function removeInterval() {
+	clearInterval(interval);
+}
+
+/***
  * click event listener for the print quote button
  * DO NOT CHANGE THE CODE BELOW!!
  ***/
 
 document
 	.getElementById('load-quote')
-	.addEventListener('click', printQuote, false);
+	.addEventListener('click', handleButtonClick, false);
 
-// Automatically refresh quote every 10 seconds
-document.addEventListener('DOMContentLoaded', () => {
-	setInterval(() => {
-		printQuote();
-	}, 10000);
-});
+document.addEventListener('DOMContentLoaded', startInterval);
