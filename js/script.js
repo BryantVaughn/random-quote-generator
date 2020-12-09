@@ -69,30 +69,39 @@ const quotes = [
 
 /***
  * `getRandomQuote` function
+ * Generates a random number to pull a quote from the quotes array and return it.
  ***/
 
 function getRandomQuote() {
+	// Generate random number between 0 and quotes length - 1
 	const randomNumber = Math.floor(Math.random() * quotes.length);
+	// Return quote object at random number index
 	return quotes[randomNumber];
 }
 
 /***
  * `printQuote` function
+ * Retrieves a random quote and updates the HTML to display new quote.
  ***/
 
 function printQuote() {
+	// Retrieve random quote object
 	const quote = getRandomQuote();
+	// Build base HTML with quote and source
 	let htmlString = `
     <p class="quote">${quote.quote}</p>
     <p class="source">${quote.source}
   `;
 
+	// Check quote object for citation and year properties
+	// Add to HTML if present
 	if (quote.citation)
 		htmlString += `<span class="citation">${quote.citation}</span>`;
 	if (quote.year) htmlString += `<span class="year">${quote.year}</span>`;
 
 	htmlString += '</p>';
 
+	// Update quote-box HTML to new random quote
 	document.getElementById('quote-box').innerHTML = htmlString;
 }
 
