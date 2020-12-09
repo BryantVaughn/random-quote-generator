@@ -124,7 +124,7 @@ function printQuote() {
 	const quote = getRandomQuote();
 
 	// Set body background to random color
-	document.body.style.backgroundColor = getRandomBackgroundColor();
+	setBackgroundColor();
 
 	// Build base HTML with quote and source
 	let htmlString = `
@@ -142,6 +142,15 @@ function printQuote() {
 
 	// Update quote-box HTML to new random quote
 	document.getElementById('quote-box').innerHTML = htmlString;
+}
+
+/***
+ * `setBackgroundColor` function
+ * Calls the getRandomBackgroundColor function and sets the returned value to the body background.
+ ***/
+
+function setBackgroundColor() {
+	document.body.style.backgroundColor = getRandomBackgroundColor();
 }
 
 /***
